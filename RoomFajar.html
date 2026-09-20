@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="RoomFajar — landing page edukasi bahasa pemrograman modern.">
+<title>RoomFajar — Learn to Code</title>
+<style>
+:root{
+  --bg:#07111f;--bg2:#0b1728;--card:rgba(15,29,49,.72);--text:#edf5ff;
+  --muted:#91a4bc;--line:rgba(255,255,255,.09);--blue:#5da9ff;--cyan:#59e1ff;
+  --green:#66e3a4;--shadow:0 20px 60px rgba(0,0,0,.28);--radius:22px;
+}
+[data-theme="light"]{
+  --bg:#f5f8fc;--bg2:#eaf1f9;--card:rgba(255,255,255,.82);--text:#102033;
+  --muted:#607086;--line:rgba(16,32,51,.1);--shadow:0 18px 50px rgba(30,60,90,.12);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;background:
+radial-gradient(circle at 80% 10%,rgba(89,225,255,.12),transparent 28%),
+radial-gradient(circle at 15% 35%,rgba(93,169,255,.10),transparent 25%),var(--bg);
+color:var(--text);line-height:1.6;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+button,input{font:inherit}
+.container{width:min(1160px,92%);margin:auto}
+.progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--blue),var(--cyan));z-index:1000}
+header{position:fixed;top:0;left:0;width:100%;z-index:999;background:rgba(7,17,31,.55);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+[data-theme="light"] header{background:rgba(245,248,252,.7)}
+.nav{height:72px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-weight:900;font-size:1.3rem;letter-spacing:-.04em}.logo span{color:var(--cyan)}
+.navlinks{display:flex;gap:25px;color:var(--muted);font-size:.93rem}.navlinks a:hover{color:var(--text)}
+.actions{display:flex;align-items:center;gap:9px}
+.iconbtn,.menu{width:40px;height:40px;border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--text);cursor:pointer}
+.menu{display:none}
+.hero{min-height:760px;padding:150px 0 90px;display:grid;grid-template-columns:1.02fr .98fr;gap:55px;align-items:center;position:relative}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:8px 13px;border:1px solid rgba(89,225,255,.2);border-radius:999px;background:rgba(89,225,255,.06);color:var(--cyan);font-size:.82rem;font-weight:700}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 15px var(--green)}
+h1{font-size:clamp(3rem,6vw,5.8rem);line-height:.98;letter-spacing:-.065em;margin:20px 0}
+.gradient{background:linear-gradient(100deg,var(--text),var(--blue),var(--cyan));-webkit-background-clip:text;color:transparent}
+.hero p{font-size:1.08rem;color:var(--muted);max-width:620px}
+.ctas{display:flex;gap:12px;margin:30px 0;flex-wrap:wrap}
+.btn{border:1px solid var(--line);padding:13px 19px;border-radius:13px;font-weight:800;cursor:pointer;display:inline-flex;gap:8px;align-items:center}
+.primary{background:linear-gradient(135deg,var(--blue),var(--cyan));color:#06101d;border:0}
+.secondary{background:var(--card)}
+.stats{display:flex;gap:30px;color:var(--muted);font-size:.86rem}.stats strong{display:block;color:var(--text);font-size:1.2rem}
+.codebox{background:linear-gradient(145deg,rgba(18,36,60,.95),rgba(7,17,31,.95));border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);overflow:hidden;transform:rotate(1.2deg);animation:float 5s ease-in-out infinite}
+.dots{display:flex;gap:7px;padding:17px;border-bottom:1px solid var(--line)}.dots i{width:9px;height:9px;border-radius:50%;background:#627083}
+pre{padding:25px;min-height:365px;overflow:auto;font:14px/1.85 "SFMono-Regular",Consolas,monospace;color:#dce9f8}
+.k{color:#ff82bd}.f{color:#6de7ff}.s{color:#a7e88d}.c{color:#71839c}.n{color:#caa7ff}
+@keyframes float{50%{transform:rotate(-.6deg) translateY(-8px)}}
+section{padding:95px 0}.sectionhead{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:35px}.eyebrow{color:var(--cyan);font-size:.8rem;text-transform:uppercase;letter-spacing:.16em;font-weight:900}.sectionhead h2{font-size:clamp(2rem,4vw,3.2rem);letter-spacing:-.045em;margin-top:7px}.sectionhead p{max-width:450px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:0 10px 35px rgba(0,0,0,.08);transition:.3s;position:relative;overflow:hidden}
+.card:hover{transform:translateY(-7px);border-color:rgba(89,225,255,.3)}
+.langicon{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:rgba(93,169,255,.1);font-weight:900;color:var(--cyan);font-size:1.1rem;margin-bottom:22px}
+.card h3{margin-bottom:7px}.card p{color:var(--muted);font-size:.9rem}.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:17px}.tag{padding:5px 9px;border-radius:8px;background:rgba(255,255,255,.05);color:var(--muted);font-size:.75rem}
+.search{display:flex;gap:10px;width:min(420px,100%)}.search input{width:100%;padding:13px 15px;border:1px solid var(--line);border-radius:13px;background:var(--card);color:var(--text);outline:none}
+.roadmap{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}.roadmap:before{content:"";position:absolute;top:28px;left:8%;right:8%;height:2px;background:var(--line)}
+.step{text-align:center;position:relative;z-index:1}.num{width:56px;height:56px;margin:auto;border-radius:50%;display:grid;place-items:center;background:var(--bg2);border:1px solid rgba(89,225,255,.35);color:var(--cyan);font-weight:900}.step h3{margin:18px 0 6px}.step p{font-size:.84rem;color:var(--muted);padding:0 15px}
+.demo{display:grid;grid-template-columns:.85fr 1.15fr;gap:20px}.editor,.output{border:1px solid var(--line);border-radius:20px;background:var(--card);overflow:hidden}.bar{padding:13px 17px;border-bottom:1px solid var(--line);font-size:.8rem;color:var(--muted);display:flex;justify-content:space-between}.editor textarea{width:100%;height:270px;background:transparent;border:0;resize:none;color:var(--text);padding:20px;font:13px/1.7 monospace;outline:none}.outputbody{padding:25px;min-height:270px;display:grid;place-items:center;text-align:center}.outputbody h3{font-size:2rem}.outputbody p{color:var(--muted)}
+.blog{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.blog .card{padding:0;overflow:hidden}.cover{height:160px;background:linear-gradient(135deg,rgba(93,169,255,.3),rgba(89,225,255,.04));display:grid;place-items:center;font-size:2.6rem}.blogcontent{padding:23px}.blogcontent small{color:var(--cyan)}.blogcontent h3{margin:8px 0}.blogcontent p{color:var(--muted);font-size:.88rem}
+.faq{max-width:800px;margin:auto}.faqitem{border-bottom:1px solid var(--line)}.faqq{width:100%;padding:20px 0;background:none;border:0;color:var(--text);text-align:left;font-weight:800;display:flex;justify-content:space-between;cursor:pointer}.faqa{max-height:0;overflow:hidden;color:var(--muted);transition:.3s}.faqitem.open .faqa{max-height:130px;padding:0 0 20px}
+.cta{padding:55px;border-radius:28px;background:linear-gradient(135deg,rgba(93,169,255,.15),rgba(89,225,255,.06));border:1px solid rgba(89,225,255,.18);text-align:center}.cta h2{font-size:clamp(2rem,4vw,3.5rem);letter-spacing:-.05em}.cta p{color:var(--muted);margin:10px auto 25px;max-width:600px}
+footer{padding:35px 0;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem}.footerin{display:flex;justify-content:space-between;gap:20px}
+.reveal{opacity:0;transform:translateY(25px);transition:.7s}.reveal.show{opacity:1;transform:none}
+.hidden{display:none!important}
+@media(max-width:850px){
+ .navlinks{display:none}.menu{display:block}.hero{grid-template-columns:1fr;padding-top:125px}.codebox{transform:none}.grid,.blog{grid-template-columns:1fr 1fr}.demo{grid-template-columns:1fr}.roadmap{grid-template-columns:1fr 1fr;gap:35px}.roadmap:before{display:none}
+}
+@media(max-width:560px){
+ .grid,.blog{grid-template-columns:1fr}.hero{min-height:auto}.stats{gap:18px}.sectionhead{display:block}.search{margin-top:20px}.footerin{display:block}.footerin p{margin-top:10px}
+}
+
+/* ===== Materi HTML ===== */
+.html-course{margin-top:25px}
+.html-course-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.html-topic{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px}
+.html-topic h3{margin-bottom:9px}
+.html-topic p{color:var(--muted);font-size:.9rem}
+.html-code{margin-top:16px;background:#07111f;border:1px solid var(--line);border-radius:14px;padding:16px;overflow:auto}
+.html-code code{font:13px/1.75 "SFMono-Regular",Consolas,monospace;color:#dce9f8}
+.html-list{margin-top:14px;padding-left:19px;color:var(--muted);font-size:.9rem}
+.html-list li{margin:7px 0}
+.html-example{margin-top:18px;padding:18px;border:1px solid rgba(89,225,255,.16);border-radius:16px;background:rgba(89,225,255,.04)}
+.html-example strong{color:var(--cyan)}
+@media(max-width:850px){.html-course-grid{grid-template-columns:1fr}}
+
+
+/* ===== Materi Bahasa Pemrograman ===== */
+.lang-course{margin-top:25px}
+.lang-course-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.lang-topic{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px}
+.lang-topic h3{margin-bottom:9px}
+.lang-topic p{color:var(--muted);font-size:.9rem}
+.lang-code{margin-top:16px;background:#07111f;border:1px solid var(--line);border-radius:14px;padding:16px;overflow:auto}
+.lang-code code{font:13px/1.75 "SFMono-Regular",Consolas,monospace;color:#dce9f8}
+.lang-list{margin-top:14px;padding-left:19px;color:var(--muted);font-size:.9rem}
+.lang-list li{margin:7px 0}
+.lang-example{margin-top:18px;padding:18px;border:1px solid rgba(89,225,255,.16);border-radius:16px;background:rgba(89,225,255,.04)}
+.lang-example strong{color:var(--cyan)}
+@media(max-width:850px){.lang-course-grid{grid-template-columns:1fr}}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header>
+ <div class="container nav">
+  <a href="#home" class="logo">Room<span>Fajar</span>.</a>
+  <nav class="navlinks">
+   <a href="#languages">Bahasa</a><a href="#html-course">HTML</a><a href="#roadmap">Roadmap</a><a href="#playground">Playground</a><a href="#blog">Blog</a><a href="#faq">FAQ</a>
+  </nav>
+  <div class="actions"><button class="iconbtn" id="theme" aria-label="Ganti tema">☼</button><button class="menu" id="menu">☰</button></div>
+ </div>
+</header>
+
+<main>
+<section class="container hero" id="home">
+ <div class="reveal">
+  <div class="badge"><span class="dot"></span> Platform belajar programming modern</div>
+  <h1>Bangun ide.<br><span class="gradient">Tulis kode.</span><br>Jadilah nyata.</h1>
+  <p>Pelajari bahasa pemrograman dari dasar hingga proyek nyata melalui materi ringkas, roadmap terarah, dan playground interaktif.</p>
+  <div class="ctas"><a class="btn primary" href="#languages">Mulai belajar →</a><a class="btn secondary" href="#playground">Coba playground</a></div>
+  <div class="stats"><div><strong>10+</strong> Bahasa</div><div><strong>60+</strong> Materi</div><div><strong>∞</strong> Ide proyek</div></div>
+ </div>
+ <div class="codebox reveal">
+  <div class="dots"><i></i><i></i><i></i></div>
+  <pre><span class="c">// Mulai dari satu baris kode</span>
+<span class="k">const</span> learner = {
+  name: <span class="s">"Future Developer"</span>,
+  goal: <span class="s">"build something"</span>,
+  curiosity: <span class="n">Infinity</span>
+};
+
+<span class="k">function</span> <span class="f">startLearning</span>(person) {
+  <span class="k">return</span> `${person.name} is coding!`;
+}
+
+<span class="f">console.log</span>(<span class="f">startLearning</span>(learner));</pre>
+ </div>
+</section>
+
+<section id="languages">
+ <div class="container">
+  <div class="sectionhead reveal"><div><div class="eyebrow">Explore</div><h2>Pilih bahasa favoritmu.</h2></div><div><p>Kenali bahasa yang paling banyak digunakan untuk web, aplikasi, data, game, dan sistem.</p><div class="search"><input id="search" placeholder="Cari bahasa..." aria-label="Cari bahasa"></div></div></div>
+  <div class="grid" id="langGrid">
+   <article class="card reveal" data-name="python"><div class="langicon">Py</div><h3>Python</h3><p>Sintaks sederhana untuk automation, data science, AI, dan backend.</p><div class="tags"><span class="tag">Beginner</span><span class="tag">AI</span><span class="tag">Data</span></div></article>
+   <article class="card reveal" data-name="javascript js"><div class="langicon">JS</div><h3>JavaScript</h3><p>Fondasi web interaktif dan ekosistem frontend hingga backend.</p><div class="tags"><span class="tag">Web</span><span class="tag">Frontend</span><span class="tag">Node.js</span></div></article>
+   <article class="card reveal" data-name="java"><div class="langicon">Ja</div><h3>Java</h3><p>Bahasa general-purpose untuk aplikasi enterprise, Android, dan backend.</p><div class="tags"><span class="tag">OOP</span><span class="tag">Backend</span></div></article>
+   <article class="card reveal" data-name="c++ cpp"><div class="langicon">C+</div><h3>C++</h3><p>Performa tinggi untuk sistem, game engine, dan aplikasi intensif.</p><div class="tags"><span class="tag">Performance</span><span class="tag">Game</span></div></article>
+   <article class="card reveal" data-name="php"><div class="langicon">PHP</div><h3>PHP</h3><p>Bahasa server-side populer untuk membangun website dinamis.</p><div class="tags"><span class="tag">Web</span><span class="tag">Backend</span></div></article>
+   <article class="card reveal" data-name="go golang"><div class="langicon">Go</div><h3>Go</h3><p>Ringan dan cepat untuk service, API, cloud, dan sistem terdistribusi.</p><div class="tags"><span class="tag">Cloud</span><span class="tag">API</span></div></article>
+  </div>
+ </div>
+</section>
+
+
+<section id="html-course">
+ <div class="container">
+  <div class="sectionhead reveal">
+   <div><div class="eyebrow">HTML Fundamentals</div><h2>Materi HTML dari dasar.</h2></div>
+   <p>Pelajari struktur halaman web, elemen, atribut, form, semantic HTML, dan praktik dasar melalui contoh kode yang bisa langsung dicoba.</p>
+  </div>
+
+  <div class="html-course-grid">
+   <article class="html-topic reveal">
+    <div class="langicon">01</div>
+    <h3>Apa itu HTML?</h3>
+    <p>HTML (HyperText Markup Language) digunakan untuk menyusun struktur dan konten sebuah halaman web.</p>
+    <ul class="html-list">
+     <li><strong>HTML</strong> mengatur struktur dan makna konten.</li>
+     <li><strong>CSS</strong> mengatur tampilan dan visual.</li>
+     <li><strong>JavaScript</strong> menambahkan interaksi dan perilaku.</li>
+    </ul>
+    <div class="html-example"><strong>Konsep sederhana:</strong> HTML adalah kerangka halaman web yang berisi elemen seperti heading, paragraf, gambar, link, dan form.</div>
+   </article>
+
+   <article class="html-topic reveal">
+    <div class="langicon">02</div>
+    <h3>Struktur dasar HTML</h3>
+    <p>Dokumen HTML umumnya dimulai dengan deklarasi doctype, lalu memiliki elemen <code>&lt;html&gt;</code>, <code>&lt;head&gt;</code>, dan <code>&lt;body&gt;</code>.</p>
+    <pre class="html-code"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="id"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Halaman Saya&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Halo Dunia!&lt;/h1&gt;
+    &lt;p&gt;Belajar HTML.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+   </article>
+
+   <article class="html-topic reveal">
+    <div class="langicon">03</div>
+    <h3>Elemen & atribut</h3>
+    <p>Elemen membentuk bagian halaman, sedangkan atribut memberikan informasi atau konfigurasi tambahan pada elemen.</p>
+    <pre class="html-code"><code>&lt;a href="https://example.com"&gt;
+  Kunjungi website
+&lt;/a&gt;
+
+&lt;img src="foto.jpg"
+     alt="Foto profil"&gt;
+
+&lt;input type="text"
+       placeholder="Nama lengkap"&gt;</code></pre>
+   </article>
+
+   <article class="html-topic reveal">
+    <div class="langicon">04</div>
+    <h3>Semantic HTML</h3>
+    <p>Elemen semantic membantu memberikan arti yang jelas pada struktur halaman dan membuat dokumen lebih mudah dipahami.</p>
+    <ul class="html-list">
+     <li><code>&lt;header&gt;</code> — bagian kepala halaman.</li>
+     <li><code>&lt;nav&gt;</code> — navigasi utama.</li>
+     <li><code>&lt;main&gt;</code> — konten utama.</li>
+     <li><code>&lt;section&gt;</code> — kelompok konten.</li>
+     <li><code>&lt;article&gt;</code> — konten mandiri.</li>
+     <li><code>&lt;footer&gt;</code> — bagian penutup halaman.</li>
+    </ul>
+   </article>
+
+   <article class="html-topic reveal">
+    <div class="langicon">05</div>
+    <h3>Heading, paragraf & link</h3>
+    <p>Elemen teks dasar merupakan fondasi untuk menyusun informasi agar mudah dibaca.</p>
+    <pre class="html-code"><code>&lt;h1&gt;Judul Utama&lt;/h1&gt;
+&lt;h2&gt;Subjudul&lt;/h2&gt;
+&lt;p&gt;Ini adalah paragraf.&lt;/p&gt;
+
+&lt;a href="#html-course"&gt;
+  Pelajari HTML
+&lt;/a&gt;</code></pre>
+   </article>
+
+   <article class="html-topic reveal">
+    <div class="langicon">06</div>
+    <h3>Form HTML</h3>
+    <p>Form digunakan untuk menerima input pengguna seperti nama, email, pilihan, dan pesan.</p>
+    <pre class="html-code"><code>&lt;form&gt;
+  &lt;label&gt;Nama&lt;/label&gt;
+  &lt;input type="text" name="nama"&gt;
+
+  &lt;label&gt;Email&lt;/label&gt;
+  &lt;input type="email" name="email"&gt;
+
+  &lt;button type="submit"&gt;
+    Kirim
+  &lt;/button&gt;
+&lt;/form&gt;</code></pre>
+   </article>
+  </div>
+ </div>
+</section>
+
+
+<section id="language-course">
+  <div class="container">
+    <div class="sectionhead reveal">
+      <div><div class="eyebrow">Programming Languages</div><h2>Materi bahasa pemrograman.</h2></div>
+      <p>Pelajari konsep dasar enam bahasa populer melalui materi singkat, konsep penting, dan contoh kode yang mudah dipahami.</p>
+    </div>
+
+    <div class="lang-course-grid">
+
+      <article class="lang-topic reveal">
+        <div class="langicon">Py</div>
+        <h3>Python</h3>
+        <p>Bahasa yang mudah dipelajari dan banyak digunakan untuk automation, data, AI, backend, dan scripting.</p>
+        <ul class="lang-list">
+          <li>Variabel dan tipe data: <code>str</code>, <code>int</code>, <code>float</code>, <code>bool</code>.</li>
+          <li>Kondisi menggunakan <code>if</code>, <code>elif</code>, dan <code>else</code>.</li>
+          <li>Perulangan menggunakan <code>for</code> dan <code>while</code>.</li>
+          <li>Fungsi dengan <code>def</code> dan parameter.</li>
+          <li>List, dictionary, tuple, set, module, dan dasar OOP.</li>
+        </ul>
+        <pre class="lang-code"><code>nama = "Fajar"
+
+def sapa(nama):
+    return f"Halo, {nama}!"
+
+print(sapa(nama))</code></pre>
+        <div class="lang-example"><strong>Latihan:</strong> Buat program kalkulator sederhana yang menerima dua angka dan operator.</div>
+      </article>
+
+      <article class="lang-topic reveal">
+        <div class="langicon">JS</div>
+        <h3>JavaScript</h3>
+        <p>Bahasa pemrograman utama untuk membuat halaman web interaktif, serta dapat digunakan di backend melalui Node.js.</p>
+        <ul class="lang-list">
+          <li>Variabel dengan <code>let</code>, <code>const</code>, dan tipe data.</li>
+          <li>Operator, kondisi, perulangan, dan function.</li>
+          <li>Array, object, dan method seperti <code>map</code> serta <code>filter</code>.</li>
+          <li>DOM untuk mengubah elemen HTML.</li>
+          <li>Event, asynchronous JavaScript, Promise, dan dasar API.</li>
+        </ul>
+        <pre class="lang-code"><code>const nama = "Fajar";
+
+function sapa(nama) {
+  return `Halo, ${nama}!`;
+}
+
+console.log(sapa(nama));</code></pre>
+        <div class="lang-example"><strong>Latihan:</strong> Buat tombol yang mengubah teks dan warna sebuah elemen HTML ketika diklik.</div>
+      </article>
+
+      <article class="lang-topic reveal">
+        <div class="langicon">Ja</div>
+        <h3>Java</h3>
+        <p>Bahasa general-purpose berbasis OOP yang banyak digunakan untuk aplikasi enterprise, backend, dan berbagai platform.</p>
+        <ul class="lang-list">
+          <li>Variabel, tipe data, operator, dan input/output.</li>
+          <li>Percabangan <code>if</code>/<code>switch</code> dan perulangan.</li>
+          <li>Method, class, object, constructor, dan encapsulation.</li>
+          <li>Inheritance, polymorphism, dan interface.</li>
+          <li>Collection seperti <code>ArrayList</code> dan dasar exception handling.</li>
+        </ul>
+        <pre class="lang-code"><code>public class Main {
+    static String sapa(String nama) {
+        return "Halo, " + nama + "!";
+    }
+
+    public static void main(String[] args) {
+        System.out.println(sapa("Fajar"));
+    }
+}</code></pre>
+        <div class="lang-example"><strong>Latihan:</strong> Buat class <code>Student</code> dengan atribut nama, umur, dan method untuk menampilkan data.</div>
+      </article>
+
+      <article class="lang-topic reveal">
+        <div class="langicon">C+</div>
+        <h3>C++</h3>
+        <p>Bahasa berperforma tinggi yang digunakan untuk sistem, game, aplikasi intensif, dan software yang membutuhkan kontrol sumber daya.</p>
+        <ul class="lang-list">
+          <li>Variabel, tipe data, operator, dan input/output.</li>
+          <li>Percabangan dan perulangan.</li>
+          <li>Function, array, string, dan reference.</li>
+          <li>Pointer dan dasar pengelolaan memori.</li>
+          <li>Class, object, inheritance, STL, dan template dasar.</li>
+        </ul>
+        <pre class="lang-code"><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    string nama = "Fajar";
+    cout &lt;&lt; "Halo, " &lt;&lt; nama &lt;&lt; "!";
+    return 0;
+}</code></pre>
+        <div class="lang-example"><strong>Latihan:</strong> Buat program untuk mencari nilai terbesar dari beberapa angka menggunakan array.</div>
+      </article>
+
+      <article class="lang-topic reveal">
+        <div class="langicon">PHP</div>
+        <h3>PHP</h3>
+        <p>Bahasa server-side yang digunakan untuk membangun website dinamis, aplikasi web, dan backend.</p>
+        <ul class="lang-list">
+          <li>Syntax PHP, variabel, konstanta, dan tipe data.</li>
+          <li>Kondisi dan perulangan.</li>
+          <li>Function, array, dan associative array.</li>
+          <li>Form handling dan dasar session.</li>
+          <li>OOP PHP, database, dan konsep backend dasar.</li>
+        </ul>
+        <pre class="lang-code"><code>&lt;?php
+
+$nama = "Fajar";
+
+function sapa($nama) {
+    return "Halo, " . $nama . "!";
+}
+
+echo sapa($nama);
+?&gt;</code></pre>
+        <div class="lang-example"><strong>Latihan:</strong> Buat form login sederhana dan tampilkan pesan berdasarkan input pengguna.</div>
+      </article>
+
+      <article class="lang-topic reveal">
+        <div class="langicon">Go</div>
+        <h3>Go</h3>
+        <p>Bahasa yang dirancang sederhana dan efisien, banyak digunakan untuk API, cloud service, backend, dan sistem terdistribusi.</p>
+        <ul class="lang-list">
+          <li>Variable, constant, tipe data, dan struktur program.</li>
+          <li>Kondisi, perulangan, dan function.</li>
+          <li>Array, slice, map, dan struct.</li>
+          <li>Method dan interface.</li>
+          <li>Goroutine, channel, error handling, dan package dasar.</li>
+        </ul>
+        <pre class="lang-code"><code>package main
+
+import "fmt"
+
+func sapa(nama string) string {
+    return "Halo, " + nama + "!"
+}
+
+func main() {
+    fmt.Println(sapa("Fajar"))
+}</code></pre>
+        <div class="lang-example"><strong>Latihan:</strong> Buat REST API sederhana dengan endpoint untuk menampilkan daftar data.</div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section id="roadmap">
+ <div class="container">
+  <div class="sectionhead reveal"><div><div class="eyebrow">Learning path</div><h2>Roadmap tanpa bingung.</h2></div><p>Ikuti alur belajar bertahap. Kuasai fondasi sebelum masuk ke teknologi yang lebih kompleks.</p></div>
+  <div class="roadmap">
+   <div class="step reveal"><div class="num">01</div><h3>Fundamental</h3><p>Logika, variabel, tipe data, kondisi, loop, dan fungsi.</p></div>
+   <div class="step reveal"><div class="num">02</div><h3>OOP & Struktur</h3><p>Class, object, modularitas, struktur data, dan clean code.</p></div>
+   <div class="step reveal"><div class="num">03</div><h3>Build Project</h3><p>Bangun website, aplikasi, API, atau project sesuai minat.</p></div>
+   <div class="step reveal"><div class="num">04</div><h3>Level Up</h3><p>Git, testing, deployment, database, dan praktik profesional.</p></div>
+  </div>
+ </div>
+</section>
+
+<section id="playground">
+ <div class="container">
+  <div class="sectionhead reveal"><div><div class="eyebrow">Interactive</div><h2>Playground mini.</h2></div><p>Edit kode di kiri, lalu jalankan untuk melihat hasilnya. Cocok untuk eksperimen cepat.</p></div>
+  <div class="demo reveal">
+   <div class="editor"><div class="bar"><span>script.js</span><button class="btn primary" id="run" style="padding:6px 10px;font-size:.75rem">▶ Run</button></div>
+    <textarea id="code">const name = "RoomFajar";
+const message = `Halo, ${name}!`;
+
+document.body.dataset.output = message;</textarea>
+   </div>
+   <div class="output"><div class="bar">Output <span id="status">Ready</span></div><div class="outputbody"><div><h3 id="output">Halo, RoomFajar!</h3><p>Output simulasi playground.</p></div></div></div>
+  </div>
+ </div>
+</section>
+
+<section id="blog">
+ <div class="container">
+  <div class="sectionhead reveal"><div><div class="eyebrow">Insights</div><h2>Belajar lewat cerita.</h2></div><p>Artikel singkat untuk membantu memahami konsep programming secara praktis.</p></div>
+  <div class="blog">
+   <article class="card reveal"><div class="cover">{"{}"}</div><div class="blogcontent"><small>Fundamental</small><h3>Memahami logika pemrograman</h3><p>Kenapa algoritma lebih penting daripada sekadar menghafal syntax?</p></div></article>
+   <article class="card reveal"><div class="cover">&lt;/&gt;</div><div class="blogcontent"><small>Web Development</small><h3>HTML, CSS, dan JavaScript</h3><p>Bagaimana tiga teknologi ini bekerja bersama membangun web.</p></div></article>
+   <article class="card reveal"><div class="cover">⌘</div><div class="blogcontent"><small>Career</small><h3>Dari belajar ke project nyata</h3><p>Strategi membuat project kecil yang bisa menjadi portofolio.</p></div></article>
+  </div>
+ </div>
+</section>
+
+<section id="faq">
+ <div class="container">
+  <div class="sectionhead reveal" style="justify-content:center;text-align:center"><div><div class="eyebrow">FAQ</div><h2>Pertanyaan umum.</h2></div></div>
+  <div class="faq">
+   <div class="faqitem reveal"><button class="faqq">Saya harus mulai dari bahasa apa? <span>+</span></button><div class="faqa">Untuk pemula, Python atau JavaScript dapat menjadi titik awal yang baik. Pilih berdasarkan tujuan belajar dan jenis proyek yang ingin dibuat.</div></div>
+   <div class="faqitem reveal"><button class="faqq">Apakah harus jago matematika? <span>+</span></button><div class="faqa">Tidak untuk memulai. Kemampuan matematika tertentu bergantung pada bidang yang dipilih, misalnya data science atau machine learning.</div></div>
+   <div class="faqitem reveal"><button class="faqq">Bagaimana cara menjadi konsisten? <span>+</span></button><div class="faqa">Buat jadwal kecil dan realistis, praktik setiap hari, serta selesaikan project sederhana daripada hanya membaca teori.</div></div>
+  </div>
+ </div>
+</section>
+
+<section>
+ <div class="container"><div class="cta reveal"><h2>Ready to write your first line?</h2><p>Mulai dari konsep sederhana, bangun project kecil, lalu terus berkembang.</p><a class="btn primary" href="#languages">Explore languages →</a></div></div>
+</section>
+</main>
+
+<footer><div class="container footerin"><strong>RoomFajar.</strong><p>© 2026 RoomFajar — dibuat untuk pembelajaran web & programming.</p></div></footer>
+
+<script>
+const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
+const progress=$("#progress");
+window.addEventListener("scroll",()=>{const h=document.documentElement; progress.style.width=(scrollY/(h.scrollHeight-innerHeight)*100)+"%"});
+const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add("show")}),{threshold:.12});
+$$(".reveal").forEach(el=>observer.observe(el));
+
+$("#theme").onclick=()=>{document.body.dataset.theme=document.body.dataset.theme==="light"?"":"light";localStorage.setItem("theme",document.body.dataset.theme)};
+if(localStorage.getItem("theme")==="light")document.body.dataset.theme="light";
+
+$("#search").addEventListener("input",e=>{
+ const q=e.target.value.toLowerCase();
+ $$("#langGrid .card").forEach(c=>c.classList.toggle("hidden",!c.dataset.name.includes(q)));
+});
+$$(".faqq").forEach(btn=>btn.onclick=()=>btn.parentElement.classList.toggle("open"));
+
+$("#run").onclick=()=>{
+ const raw=$("#code").value;
+ const match=raw.match(/message\s*=\s*`([^`]*)`/);
+ $("#output").textContent=match?match[1].replace(/\$\{name\}/g,"RoomFajar"):"Kode berhasil dijalankan.";
+ $("#status").textContent="Executed ✓";
+};
+$("#menu").onclick=()=>{
+ const nav=$(".navlinks");
+ nav.style.display=nav.style.display==="flex"?"none":"flex";
+ nav.style.position="absolute";nav.style.top="72px";nav.style.left="4%";nav.style.right="4%";
+ nav.style.padding="20px";nav.style.border="1px solid var(--line)";nav.style.borderRadius="16px";nav.style.background="var(--bg2)";nav.style.flexDirection="column";
+};
+</script>
+</body>
+</html>
